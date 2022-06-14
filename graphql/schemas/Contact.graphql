@@ -1,0 +1,24 @@
+type Contact @model {
+    id: ID
+    name: String!
+    email: String
+    phone: String
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+extend type Mutation @guard(with: ["api"]) {
+    contactUpsert(input: ContactUpsertInput @spread): Contact @upsert
+}
+
+input ContactHasOneInput {
+    upsert: ContactUpsertInput
+}
+
+input ContactUpsertInput {
+    id: ID @rules(apply: ["string", "exists:contacts,id", "required_without_all:name"])
+    name: String @rules(apply: ["required_without:id", "string"])
+    email: String @rules(apply: ["required_without:id", "email:rfc,dns"])
+    phone: String @rules(apply: ["required_without:id", "string"])
+}
+

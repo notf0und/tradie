@@ -1,0 +1,26 @@
+type Note @model {
+    id: ID
+    title: String!
+    description: String!
+    job_id: Int!
+    created_at: DateTime!
+    updated_at: DateTime!
+    job: Job! @hasOne
+}
+
+extend type Mutation @guard(with: ["api"]) {
+    noteUpsert(input: NoteUpsertInput @spread): Note @upsert
+}
+
+input NoteHasManyInput {
+    connect: [ID!]
+    disconnect: [ID!]
+    upsert: [NoteUpsertInput!]
+}
+
+input NoteUpsertInput {
+    id: ID @rules(apply: ["string", "exists:notes,id", "required_without_all:title,description"])
+    title: String @rules(apply: ["required_without:id"])
+    description: String @rules(apply: ["required_without:id"])
+}
+

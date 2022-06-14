@@ -1,0 +1,43 @@
+type Job @model {
+    id: ID
+    title: String!
+    description: String!
+    status: JobStatus!
+    user_id: Int!
+    created_at: DateTime!
+    updated_at: DateTime!
+    user: User! @belongsTo
+    contact: Contact @hasOne
+    notes: [Note]! @hasMany
+}
+
+enum JobStatus {
+    SCHEDULED @enum(value: "scheduled")
+    ACTIVE @enum(value: "active")
+    INVOICING @enum(value: "invoicing")
+    TO_PRICED @enum(value: "to priced")
+    COMPLETED @enum(value: "completed")
+}
+
+
+extend type Query @guard(with: ["api"]) {
+    jobs(
+        where: _ @whereConditions(columns: ["id", "title", "description", "status"])
+        orderBy: [OrderByClause!] @orderBy
+    ): [Job!] @all(scopes: ["isOwner"])
+
+}
+
+extend type Mutation @guard(with: ["api"]) {
+    jobUpsert(input: JobUpsertInput @spread): Job @upsert
+}
+
+input JobUpsertInput {
+    id: ID @rules(apply: ["string", "exists:jobs,id", "required_without_all:title,description"])
+    title: String @rules(apply: ["required_without:id"])
+    description: String @rules(apply: ["required_without:id"])
+    status: String @rules(apply: ["string", "in:scheduled,active,invoicing,to priced,completed"])
+    contact: ContactHasOneInput
+    notes: NoteHasManyInput
+}
+
