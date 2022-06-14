@@ -1,0 +1,615 @@
+_type: export
+__export_format: 4
+__export_date: 2022-06-14T11:29:16.482Z
+__export_source: insomnia.desktop.app:v2022.4.0
+resources:
+  - _id: req_a7c939f6ae674402b2dc8e1336f4e784
+    parentId: fld_746d2ed11ee9476bb8e52b0a3bebbea1
+    modified: 1655203575336
+    created: 1655189324704
+    url: "{{host}}"
+    name: Register
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation Register($input: RegisterInput) {\n  register(input:
+        $input) {\n    tokens
+        {\n      access_token\n      refresh_token\n      expires_in\n      token_type\n      user
+        {\n        id\n        name\n        email\n      }\n    }\n    status\n    __typename\n  }\n}\n\n","variables":{"input":{"name":"{{username}}","email":"{{username}}","password":"{{
+        password }}","password_confirmation":"{{ password
+        }}"}},"operationName":"Register"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_360ceb56615f4a618dac37e8912c56d3
+    authentication: {}
+    metaSortKey: -1636974099496
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_746d2ed11ee9476bb8e52b0a3bebbea1
+    parentId: wrk_d2dce9f2a1be42c69c273324034c2812
+    modified: 1655189324701
+    created: 1655189324701
+    name: Auth
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1636974095242
+    _type: request_group
+  - _id: wrk_d2dce9f2a1be42c69c273324034c2812
+    parentId: null
+    modified: 1655189324671
+    created: 1655189324671
+    name: Tradie
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_1ce013d0514d423fa715b445ca8bec63
+    parentId: fld_746d2ed11ee9476bb8e52b0a3bebbea1
+    modified: 1655204076888
+    created: 1655189324703
+    url: "{{host}}"
+    name: Login
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation Login($input: LoginInput!) {\n  login(input: $input)
+        {\n    access_token\n    refresh_token\n    expires_in\n    token_type\n    user
+        {\n      id\n      name\n      email\n    }\n    __typename\n  }\n}\n","variables":{"input":{"username":"{{username}}","password":"{{password}}"}},"operationName":"Login"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_360ceb56615f4a618dac37e8912c56d3
+    authentication: {}
+    metaSortKey: -1636974099446
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_51c822f67d85455c940085ba35a4a476
+    parentId: fld_746d2ed11ee9476bb8e52b0a3bebbea1
+    modified: 1655195022872
+    created: 1655189324706
+    url: "{{host}}"
+    name: Refresh Token
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: "{\"query\":\"mutation RefreshToken($input: RefreshTokenInput)
+        {\\n  refreshToken(input: $input)
+        {\\n    access_token\\n    refresh_token\\n    expires_in\\n    token_t\
+        ype\\n    __typename\\n  }\\n}\",\"variables\":{\"input\":{\"refresh_to\
+        ken\":\"{% response 'body', 'req_37e0c262843d4b2dae65294c3b5b64ae',
+        'b64::JC5kYXRhLmxvZ2luLnJlZnJlc2hfdG9rZW4=::46b', 'when-expired', 60
+        %}\"}},\"operationName\":\"RefreshToken\"}"
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_360ceb56615f4a618dac37e8912c56d3
+    authentication: {}
+    metaSortKey: -1636967197731.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_23537ddc92574e65a90147b50bfb601d
+    parentId: fld_746d2ed11ee9476bb8e52b0a3bebbea1
+    modified: 1655189324708
+    created: 1655189324708
+    url: "{{host}}"
+    name: Logout
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation Logout {\n  logout
+        {\n    status\n    message\n    __typename\n  }\n}\n\n","operationName":"Logout"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_360ceb56615f4a618dac37e8912c56d3
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_37e0c262843d4b2dae65294c3b5b64ae',
+        'b64::JC5kYXRhLmxvZ2luLmFjY2Vzc190b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1636963746874.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8fba48e062d64dda8d9af1e784bb6f22
+    parentId: fld_746d2ed11ee9476bb8e52b0a3bebbea1
+    modified: 1655190585180
+    created: 1655189324710
+    url: "{{host}}"
+    name: Forgot Password
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation ForgotPassowrd($input: ForgotPasswordInput!)
+        {\n  forgotPassword(input: $input)
+        {\n    status\n    message\n    __typename\n  }\n}\n","variables":{"input":{"email":"{{username}}"}}}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_360ceb56615f4a618dac37e8912c56d3
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_37e0c262843d4b2dae65294c3b5b64ae',
+        'b64::JC5kYXRhLmxvZ2luLmFjY2Vzc190b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1636962021445.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b46a5d99d87e4f93bec0a92136440150
+    parentId: fld_746d2ed11ee9476bb8e52b0a3bebbea1
+    modified: 1655190560727
+    created: 1655189324711
+    url: "{{host}}"
+    name: Update Forgotten Password
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation UpdateForgottenPassword($input:
+        NewPasswordWithCodeInput) {\n  updateForgottenPassword(input: $input)
+        {\n    status\n    message\n    __typename\n  }\n}\n\n","variables":{"input":{"email":"{{
+        username
+        }}","token":"491ce9a786eb027829c979ce0dce7e57eeb785f8c9e1041270dd78389ea99c50","password":"{{
+        password }}","password_confirmation":"{{ password }}"}}}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_360ceb56615f4a618dac37e8912c56d3
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_37e0c262843d4b2dae65294c3b5b64ae',
+        'b64::JC5kYXRhLmxvZ2luLmFjY2Vzc190b2tlbg==::46b', 'always', 60 %}"
+    metaSortKey: -1636961158731.3125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e2c2bb5d75444aef8dbf58e706b36975
+    parentId: fld_21ebe6eba57e48cebf0609cf6c46fa62
+    modified: 1655204619694
+    created: 1655189324765
+    url: "{{host}}"
+    name: Index
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query Jobs {\n  jobs
+        {\n    id\n\t\ttitle\n\t\tdescription\n\t\tstatus\n\t\tcreated_at\n\t\tupdated_at\n\t\tcontact
+        {\n\t\t\tid\n\t\t\tname\n\t\t\temail\n\t\t\tphone\n\t\t},\n\t\tnotes
+        {\n\t\t\tid\n\t\t\ttitle\n\t\t\tdescription\n\t\t}\n  }\n}\n  ","operationName":"Jobs"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_38aad320b838408da604b9c6539de57e
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: -1636243231832.375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_21ebe6eba57e48cebf0609cf6c46fa62
+    parentId: wrk_d2dce9f2a1be42c69c273324034c2812
+    modified: 1655189423891
+    created: 1655189324765
+    name: Job
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1635661901329.586
+    _type: request_group
+  - _id: req_76049a353d2e469aafa0d00be02797c6
+    parentId: fld_21ebe6eba57e48cebf0609cf6c46fa62
+    modified: 1655204627364
+    created: 1655190623248
+    url: "{{host}}"
+    name: Upsert
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation JobUpsert($input: JobUpsertInput)
+        {\n  jobUpsert(input: $input)
+        {\n    id\n\t\ttitle\n\t\tdescription\n\t\tstatus\n\t\tcreated_at\n\t\tupdated_at\n\t\tcontact
+        {\n\t\t\tid\n\t\t\tname\n\t\t\temail\n\t\t\tphone\n\t\t},\n\t\tnotes
+        {\n\t\t\tid\n\t\t\ttitle\n\t\t\tdescription\n\t\t}\n  }\n}","variables":{"input":{"title":"Job
+        Title","description":"Job description"}},"operationName":"JobUpsert"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_38aad320b838408da604b9c6539de57e
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: -1636176007019.754
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e9f07b82606c45ebae97b2dd3b2b427d
+    parentId: fld_7a01b62eaa494242bc52c3274228a58f
+    modified: 1655204632078
+    created: 1655195294447
+    url: "{{host}}"
+    name: Create a new job
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation Jobs($input: JobUpsertInput) {\n  jobUpsert(input:
+        $input)
+        {\n    id\n\t\ttitle\n\t\tdescription\n\t\tstatus\n\t\tcreated_at\n\t\tupdated_at\n\t\tcontact
+        {\n\t\t\tid\n\t\t\tname\n\t\t\temail\n\t\t\tphone\n\t\t},\n\t\tnotes
+        {\n\t\t\tid\n\t\t\ttitle\n\t\t\tdescription\n\t\t}\n  }\n}","variables":{"input":{"title":"Job
+        Title","description":"Job description"}},"operationName":"Jobs"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_38aad320b838408da604b9c6539de57e
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: -1636162001860.8745
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_7a01b62eaa494242bc52c3274228a58f
+    parentId: fld_21ebe6eba57e48cebf0609cf6c46fa62
+    modified: 1655191603580
+    created: 1655191577309
+    name: Examples
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1636176006969.754
+    _type: request_group
+  - _id: req_7c2c3f11ad274d6c8c1fc0dd314a6d57
+    parentId: fld_7a01b62eaa494242bc52c3274228a58f
+    modified: 1655204636430
+    created: 1655203083402
+    url: "{{host}}"
+    name: Create a new job with contact and 2 notes
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation Jobs($input: JobUpsertInput) {\n  jobUpsert(input:
+        $input)
+        {\n    id\n\t\ttitle\n\t\tdescription\n\t\tstatus\n\t\tcreated_at\n\t\tupdated_at\n\t\tcontact
+        {\n\t\t\tid\n\t\t\tname\n\t\t\temail\n\t\t\tphone\n\t\t},\n\t\tnotes
+        {\n\t\t\tid\n\t\t\ttitle\n\t\t\tdescription\n\t\t}\n  }\n}","variables":{"input":{"title":"Job
+        Title","description":"Job
+        description","contact":{"upsert":{"name":"Contact
+        name","email":"gonzartur@gmail.com","phone":"123456789"}},"notes":{"upsert":[{"title":"Note
+        1","description":"Description 1"},{"title":"Note
+        2","description":"Description 2"}]}}},"operationName":"Jobs"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_38aad320b838408da604b9c6539de57e
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: -1636160601344.9866
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ae62da8a866f445d9009ab96928b4b62
+    parentId: fld_7a01b62eaa494242bc52c3274228a58f
+    modified: 1655204644562
+    created: 1655191840038
+    url: "{{host}}"
+    name: Update a Job
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation Jobs($input: JobUpsertInput) {\n  jobUpsert(input:
+        $input)
+        {\n    id\n\t\ttitle\n\t\tdescription\n\t\tstatus\n\t\tcreated_at\n\t\tupdated_at\n\t\tcontact
+        {\n\t\t\tid\n\t\t\tname\n\t\t\temail\n\t\t\tphone\n\t\t},\n\t\tnotes
+        {\n\t\t\tid\n\t\t\ttitle\n\t\t\tdescription\n\t\t}\n  }\n}","variables":{"input":{"id":"1","title":"Updated
+        Job Title","description":"Updated job description","status":"to
+        priced"}},"operationName":"Jobs"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_38aad320b838408da604b9c6539de57e
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: -1636159200829.0986
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c4cae390da0d46d3ba485f8213ddad18
+    parentId: fld_7a01b62eaa494242bc52c3274228a58f
+    modified: 1655204651055
+    created: 1655204478372
+    url: "{{host}}?XDEBUG_SESSION_START=PHPSTORM"
+    name: Search for a job by id
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query Jobs($value: Mixed) {\n  jobs(where: { column: ID,
+        operator: EQ value: $value})
+        {\n    id\n\t\ttitle\n\t\tdescription\n\t\tstatus\n\t\tcreated_at\n\t\tupdated_at\n\t\tcontact
+        {\n\t\t\tid\n\t\t\tname\n\t\t\temail\n\t\t\tphone\n\t\t},\n\t\tnotes
+        {\n\t\t\tid\n\t\t\ttitle\n\t\t\tdescription\n\t\t}\n  }\n}\n  ","variables":{"value":"1"},"operationName":"Jobs"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_38aad320b838408da604b9c6539de57e
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: -1636159200804.0986
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e0b1be4024074dda9cfd0e65ad0bd361
+    parentId: fld_7a01b62eaa494242bc52c3274228a58f
+    modified: 1655204655101
+    created: 1655191620650
+    url: "{{host}}?XDEBUG_SESSION_START=PHPSTORM"
+    name: Search for a job by title
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query Jobs($value: Mixed) {\n  jobs(where: { column:
+        DESCRIPTION, operator: LIKE value: $value})
+        {\n    id\n\t\ttitle\n\t\tdescription\n\t\tstatus\n\t\tcreated_at\n\t\tupdated_at\n\t\tcontact
+        {\n\t\t\tid\n\t\t\tname\n\t\t\temail\n\t\t\tphone\n\t\t},\n\t\tnotes
+        {\n\t\t\tid\n\t\t\ttitle\n\t\t\tdescription\n\t\t}\n  }\n}\n  ","variables":{"value":"%Updated%"},"operationName":"Jobs"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_38aad320b838408da604b9c6539de57e
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: -1636159200779.0986
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_eb7ade1c232f48bebe69eb41630bf64d
+    parentId: fld_7a01b62eaa494242bc52c3274228a58f
+    modified: 1655204659339
+    created: 1655199973001
+    url: "{{host}}?XDEBUG_SESSION_START=PHPSTORM"
+    name: Search for a job by description
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query Jobs($value: Mixed) {\n  jobs(where: { column:
+        DESCRIPTION, operator: LIKE value: $value})
+        {\n    id\n\t\ttitle\n\t\tdescription\n\t\tstatus\n\t\tcreated_at\n\t\tupdated_at\n\t\tcontact
+        {\n\t\t\tid\n\t\t\tname\n\t\t\temail\n\t\t\tphone\n\t\t},\n\t\tnotes
+        {\n\t\t\tid\n\t\t\ttitle\n\t\t\tdescription\n\t\t}\n  }\n}\n  ","variables":{"value":"%Updated%"},"operationName":"Jobs"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_38aad320b838408da604b9c6539de57e
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: -1636156399772.3228
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5d75a92085c945919b8d74b7404273ca
+    parentId: fld_7a01b62eaa494242bc52c3274228a58f
+    modified: 1655204663491
+    created: 1655201339334
+    url: "{{host}}?XDEBUG_SESSION_START=PHPSTORM"
+    name: Search for a job by status
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query Jobs($value: Mixed) {\n  jobs(where: { column: STATUS,
+        operator: EQ value: $value})
+        {\n    id\n\t\ttitle\n\t\tdescription\n\t\tstatus\n\t\tcreated_at\n\t\tupdated_at\n\t\tcontact
+        {\n\t\t\tid\n\t\t\tname\n\t\t\temail\n\t\t\tphone\n\t\t},\n\t\tnotes
+        {\n\t\t\tid\n\t\t\ttitle\n\t\t\tdescription\n\t\t}\n  }\n}\n  ","variables":{"value":"to
+        priced"},"operationName":"Jobs"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_38aad320b838408da604b9c6539de57e
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: -1636155699520.629
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a912ce7cfae6417bab8815ba56ed4a37
+    parentId: fld_7a01b62eaa494242bc52c3274228a58f
+    modified: 1655206095436
+    created: 1655200244036
+    url: "{{host}}"
+    name: Sort all jobs by creation date descending
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query Jobs {\n  jobs(orderBy: { column: \"created_at\" order:
+        DESC})
+        {\n    id\n\t\ttitle\n\t\tdescription\n\t\tstatus\n\t\tcreated_at\n\t\tupdated_at\n\t\tcontact
+        {\n\t\t\tid\n\t\t\tname\n\t\t\temail\n\t\t\tphone\n\t\t},\n\t\tnotes
+        {\n\t\t\tid\n\t\t\ttitle\n\t\t\tdescription\n\t\t}\n  }\n}\n  ","operationName":"Jobs"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_38aad320b838408da604b9c6539de57e
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: -1636154999268.9348
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_a90eb2400d084b189eef8a06a4c12bda
+    parentId: wrk_d2dce9f2a1be42c69c273324034c2812
+    modified: 1655189510948
+    created: 1655189324673
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: {}
+    color: null
+    isPrivate: false
+    metaSortKey: 1636960211183
+    _type: environment
+  - _id: jar_685117fca2dd4dd0ae7107fff1d32903
+    parentId: wrk_d2dce9f2a1be42c69c273324034c2812
+    modified: 1655204971831
+    created: 1655189324682
+    name: Default Jar
+    cookies:
+      - key: XDEBUG_SESSION
+        value: PHPSTORM
+        domain: tradie.test
+        path: /
+        extensions:
+          - SameSite=Lax
+        hostOnly: true
+        creation: 2022-06-14T07:10:24.712Z
+        lastAccessed: 2022-06-14T11:09:31.831Z
+        id: "2074444182792059"
+    _type: cookie_jar
+  - _id: spc_74fda8a28e814fcc9e3a3cc83661f2ef
+    parentId: wrk_d2dce9f2a1be42c69c273324034c2812
+    modified: 1655189324919
+    created: 1655189324683
+    fileName: Tradie
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_05fba650d1054444b4be2f5ea1fac615
+    parentId: env_a90eb2400d084b189eef8a06a4c12bda
+    modified: 1655204981887
+    created: 1655189324673
+    name: Local
+    data:
+      host: http://127.0.0.1:8000/graphql
+      username: demo@example.com
+      password: tradie-demo
+      token: "{% response 'body', 'req_1ce013d0514d423fa715b445ca8bec63',
+        'b64::JC5kYXRhLmxvZ2luLmFjY2Vzc190b2tlbg==::46b', 'always', 60 %}"
+    dataPropertyOrder:
+      "&":
+        - host
+        - username
+        - password
+        - token
+    color: null
+    isPrivate: false
+    metaSortKey: 1636960233298
+    _type: environment
